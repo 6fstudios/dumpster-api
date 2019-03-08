@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "dumpster-api",
+  "builds": [
+    {
+      "src": "**/*.js",
+      "use": "@now/node"
+    }
+  ]
+}
