@@ -3,7 +3,7 @@
   "name": "dumpster-api",
   "builds": [
     {
-      "src": "**/*.js",
+      "src": "/index.js",
       "use": "@now/node"
     }
   ]

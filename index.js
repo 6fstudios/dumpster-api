@@ -1,10 +1,20 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const cors = require('cors');
+const handler = require('./handler');
+const handleAddItems = require('./handlers/addItems');
+const bodyParser = require('body-parser');
 
-app.get('*', (req, res) => {
-    res.write('<h1><marquee direction=right>Hello from Express path `/` on Now 2.0!</marquee></h1>')
-    res.write('<h2>Go to <a href="/about">/about</a></h2>')
-    res.end()
-})
+const app = express();
+app.use(cors());
+app.use(bodyParser.json({ type: '*/*' }));
 
-module.exports = app
+app.post('/items', handleAddItems);
+
+app.get('*', async (req, res) => {
+  const data = await handler(req);
+  res.json(data);
+});
+
+app.listen(1234);
+
+module.exports = app;
