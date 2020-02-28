@@ -5,16 +5,19 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "chrome-aws-lambda": "^2.1.1",
     "cors": "^2.8.4",
     "express": "^4.16.4",
     "image-size": "^0.7.4",
     "node-fetch": "^2.3.0",
-    "puppeteer": "^1.17.0",
+    "now": "^17.0.4",
+    "puppeteer-core": "^2.1.1",
     "url": "^0.11.0"
   },
   "scripts": {
     "start": "node .",
-    "serve": "nodemon ."
+    "serve": "nodemon .",
+    "deploy": "now"
   },
   "devDependencies": {
     "nodemon": "^1.19.0"

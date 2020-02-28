@@ -1,10 +1,15 @@
 const fetch = require('node-fetch');
 const parse = require('./parse');
-const puppeteer = require('puppeteer');
+const chrome = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 const URL = require('url');
 
 async function getPageContent(url) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: chrome.args,
+    executablePath: await chrome.executablePath,
+    headless: chrome.headless,
+  });
   const page = await browser.newPage();
   const response = await page.goto(url);
 
@@ -14,7 +19,7 @@ async function getPageContent(url) {
   const content = await page.content();
   const images = await page.evaluate(() => {
     return Array.from(document.querySelectorAll('img')).map(el => {
-      const { naturalHeight, naturalWidth, src } = el;
+      const {naturalHeight, naturalWidth, src} = el;
       return {
         height: naturalHeight,
         width: naturalWidth,
@@ -24,17 +29,17 @@ async function getPageContent(url) {
   });
 
   const u = await page.url();
-  const { protocol, host } = URL.parse(u);
+  const {protocol, host} = URL.parse(u);
   const baseUrl = `${protocol}//${host}/`;
 
   await browser.close();
 
-  return { content, contentType, baseUrl, images };
+  return {content, contentType, baseUrl, images};
 }
 
 async function fetchContent(url) {
   try {
-    const { content, contentType, baseUrl, images } = await getPageContent(url);
+    const {content, contentType, baseUrl, images} = await getPageContent(url);
     if (contentType.includes('application/json')) {
       return {
         images: ['https://image.flaticon.com/icons/svg/136/136443.svg'],
