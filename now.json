@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "build": {
-    "env": {
-      "ACCESS_TOKEN": "@access-token"
-    }
+  "env": {
+    "ACCESS_TOKEN": "@access-token"
   },
   "builds": [
     {
