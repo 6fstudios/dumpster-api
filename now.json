@@ -1,6 +1,11 @@
 {
   "version": 2,
   "name": "dumpster-api",
+  "build": {
+    "env": {
+      "ACCESS_TOKEN": "@access-token"
+    }
+  },
   "builds": [
     {
       "src": "/index.js",
