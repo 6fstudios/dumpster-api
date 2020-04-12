@@ -9,7 +9,7 @@ async function fetchMetadata(req, res) {
   const {content, images} = await fetchPage(url);
   const og = parseOgData(content, url);
 
-  res.send({images, og}); // {content, contentType, images, og}
+  res.send({images, og});
 }
 
 module.exports = fetchMetadata;

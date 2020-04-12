@@ -7,6 +7,10 @@ function getOgData(html) {
     const [og, ...keyParts] = el.attribs.property.split(':');
     data[keyParts.join(':')] = el.attribs.content;
   });
+
+  if (!data.title) {
+    data.title = $('title').text()
+  }
   return data;
 }
 
