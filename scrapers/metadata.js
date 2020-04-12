@@ -1,17 +1,15 @@
-const fetch = require('node-fetch');
-const parse = require('../parse');
+const parseOgData = require('../parsers/open-graph');
+const fetchPage = require('../scrapers/puppeteer-fetch');
 
 async function fetchMetadata(req, res) {
-  const {url} = req.body;
+  const {url} = req.query;
   if (!url) {
     return res.status(400).send('Missing url');
   }
-  const r = await fetch(url);
-  const html = await r.text();
+  const {content, images} = await fetchPage(url);
+  const og = parseOgData(content, url);
 
-  const json = parse(html, url);
-
-  res.send(json)
+  res.send({images, og}); // {content, contentType, images, og}
 }
 
 module.exports = fetchMetadata;

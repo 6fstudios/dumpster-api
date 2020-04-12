@@ -18,11 +18,12 @@
     "url": "^0.11.0"
   },
   "scripts": {
-    "start": "node .",
+    "start": "NODE_ENV=production node .",
     "serve": "nodemon .",
     "deploy": "now"
   },
   "devDependencies": {
-    "nodemon": "^1.19.0"
+    "nodemon": "^1.19.0",
+    "puppeteer": "^2.1.1"
   }
 }
